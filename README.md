@@ -2,6 +2,10 @@
 
 여러 PC에서 카카오톡 자동 로그인
 
+
+https://user-images.githubusercontent.com/15166740/225289222-b16525f1-9239-4537-9c79-9414aeaa191d.mp4
+
+
 ## credentials.json
 
 ```json
