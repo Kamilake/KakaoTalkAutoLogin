@@ -13,6 +13,7 @@ https://user-images.githubusercontent.com/15166740/225289222-b16525f1-9239-4537-
   "kakaoAccount" : "exjang0@gmail.com",
   "password" : "echo MyPasswordHere | openssl enc -aes-256-cbc -a -salt -pass pass:kamikami -iter 100"
 }
+키가 공개되어 있어서 암호화는 사실 아무 쓸모없어요
 ```
 
 ## 이게 안전한지 어떻게 알고 암호를 막 쳐요?
