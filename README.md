@@ -18,3 +18,11 @@ https://user-images.githubusercontent.com/15166740/225289222-b16525f1-9239-4537-
 ## 이게 안전한지 어떻게 알고 암호를 막 쳐요?
 
 그러게요! 소스에서 빌드하세요!
+
+
+## PC가 켜지면 자동 실행되게 설정하는 방법
+
+### 시작->실행-> shell:startup
+![image](https://user-images.githubusercontent.com/15166740/225290613-5f575cb5-8316-405c-968b-13ef86f9d39f.png)
+![image](https://user-images.githubusercontent.com/15166740/225290696-e46cf3de-774c-4f1a-97da-00fca9af2612.png)
+
