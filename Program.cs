@@ -40,6 +40,14 @@ namespace MyApp
         // 허용 가능한 해상도가 아니면 종료
         return;
       }
+
+      // 활성 창과 로그아웃 창이 서로 같은 경우에만 로그인 시도
+      if (GetForegroundWindow() != hWnd_logoutNoti)
+      {
+        Console.WriteLine("not focused");
+        return;
+      }
+
       sendKey(hWnd_logoutNoti, VirtualKeys.Return);
       Console.WriteLine("logoutNoti:" + hWnd_logoutNoti);
       // 로그인 창 찾는 부분 시작
