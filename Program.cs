@@ -81,7 +81,7 @@ namespace MyApp
       StringBuilder sb = new StringBuilder(256);
       GetWindowText(hWnd, sb, sb.Capacity);
       string title = sb.ToString();
-      Console.WriteLine("title:" + title);
+      // Console.WriteLine("title:" + title);
       // if title has " - 가상 컴퓨터 연결" then it is remote desktop
       if (title.Contains(" - 가상 컴퓨터 연결"))
         return true;
