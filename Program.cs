@@ -6,7 +6,6 @@ using System.Security;
 
 namespace MyApp
 {
-
   public class Program
   {
     static void sendKey(IntPtr hWnd, VirtualKeys key)
@@ -22,14 +21,13 @@ namespace MyApp
       // 로그아웃 되었습니다 창 찾는 부분 끝
       if (hWnd_logoutNoti == IntPtr.Zero)
         return;
-        //get window size
+      //get window size
       RECT rect = new RECT();
-      GetWindowRect(hWnd_logoutNoti,out rect);
+      GetWindowRect(hWnd_logoutNoti, out rect);
       int width = rect.Right - rect.Left;
       int height = rect.Bottom - rect.Top;
       Console.WriteLine("width:" + width);
       Console.WriteLine("height:" + height);
-
       // 허용 가능한 해상도 쌍을 설정, 299x142, 374x177
       if (!(
         (width == 299 && height == 142) ||
@@ -39,7 +37,6 @@ namespace MyApp
         // 허용 가능한 해상도가 아니면 종료
         return;
       }
-
       sendKey(hWnd_logoutNoti, VirtualKeys.Return);
       Console.WriteLine("logoutNoti:" + hWnd_logoutNoti);
       // 로그인 창 찾는 부분 시작
@@ -53,10 +50,8 @@ namespace MyApp
 
       if (hWnd_loginPage == IntPtr.Zero)
         return;
-
       if (hEdit_id == IntPtr.Zero)
         return;
-
       if (hEdit_pw == IntPtr.Zero)
         return;
 
@@ -113,14 +108,23 @@ namespace MyApp
     }
     static void Main(string[] args)
     {
+      String? phrase = encrypt("U2FsdGVkX1+0K1uV0ikO3uQCOQJiZ5fBgDwQxH8vCUulH50clT5Z2Onkl/XUAstr", true);
+      if (phrase == null || !phrase.Equals("MyPasswordHere"))
+      {
+        Console.WriteLine("OpenSSL이 정상적으로 작동하지 않습니다. OpenSSL을 설치하고 다시 시도해주세요.");
+        Console.WriteLine("https://community.chocolatey.org/packages/openssl");
+        Console.WriteLine("닫으려면 아무 키나 누르세요...");
+        Console.ReadLine();
+        return;
+      }
       Console.Write("[카카오톡 자동 로그인]\n");
       getCredentials();
       IntPtr hWnd_logoutNotice = new IntPtr();
-
+      Console.Write("로그인 대기중...");
       while (true)
       {
         var idleTime = IdleTimeDetector.GetIdleTimeInfo();
-        if(IsWindowRemoteDesktopFocused())
+        if (IsWindowRemoteDesktopFocused())
         {
           // Console.Write("RDP");
           Thread.Sleep(200);
