@@ -30,7 +30,10 @@ namespace MyApp
       Console.WriteLine("height:" + height);
       // 허용 가능한 해상도 쌍을 설정, 299x142, 374x177
       if (!(
+        (width == 299 && height == 141) ||
         (width == 299 && height == 142) ||
+        (width == 300 && height == 141) ||
+        (width == 300 && height == 142) ||
         (width == 374 && height == 177)
       ))
       {
