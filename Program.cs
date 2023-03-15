@@ -73,17 +73,44 @@ namespace MyApp
       Console.WriteLine("loginConfirm:" + hWnd_loginConfirm);
       // 로그인 확인 팝업이 출력되면 확인 버튼 클릭 끝
     }
+    static bool IsWindowRemoteDesktopFocused()
+    {
+      IntPtr hWnd = GetForegroundWindow();
+      if (hWnd == IntPtr.Zero)
+        return false;
+      StringBuilder sb = new StringBuilder(256);
+      GetWindowText(hWnd, sb, sb.Capacity);
+      string title = sb.ToString();
+      Console.WriteLine("title:" + title);
+      // if title has " - 가상 컴퓨터 연결" then it is remote desktop
+      if (title.Contains(" - 가상 컴퓨터 연결"))
+        return true;
+      if (title.Contains(": 원격 데스크톱 연결"))
+        return true;
+      if (title.Equals("Parsec"))
+        return true;
+      if (title.Contains(" - VNC Viewer"))
+        return true;
+      return false;
+    }
     static void Main(string[] args)
     {
       Console.Write("[카카오톡 자동 로그인]\n");
       getCredentials();
       IntPtr hWnd_logoutNotice = new IntPtr();
+
       while (true)
       {
         var idleTime = IdleTimeDetector.GetIdleTimeInfo();
+        if(IsWindowRemoteDesktopFocused())
+        {
+          // Console.Write("RDP");
+          Thread.Sleep(200);
+          continue;
+        }
         if (idleTime.IdleTime.TotalSeconds >= 0.1f)
         {
-          Thread.Sleep(100);
+          Thread.Sleep(200);
           continue;
         }
         hWnd_logoutNotice = new IntPtr(FindWindow("EVA_Window_Dblclk", ""));
@@ -95,6 +122,7 @@ namespace MyApp
         }
         Login();
         Thread.Sleep(1000);
+
       }
     }
 

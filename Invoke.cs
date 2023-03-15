@@ -2158,9 +2158,21 @@ namespace MyApp // Note: actual namespace depends on the project name.
     [DllImport("user32")]
     private static extern int GetWindowTextLengthW(IntPtr windowHandle);
     [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+    public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
     [DllImport("user32.dll", SetLastError = true)]
     public static extern uint SendInput(uint numberOfInputs, INPUT[] inputs, int sizeOfInputStructure);
+
+    /// <summary>
+    ///     Retrieves a handle to the foreground window (the window with which the user is currently working). The system
+    ///     assigns a slightly higher priority to the thread that creates the foreground window than it does to other threads.
+    ///     <para>See https://msdn.microsoft.com/en-us/library/windows/desktop/ms633505%28v=vs.85%29.aspx for more information.</para>
+    /// </summary>
+    /// <returns>
+    ///     C++ ( Type: Type: HWND )<br /> The return value is a handle to the foreground window. The foreground window
+    ///     can be NULL in certain circumstances, such as when a window is losing activation.
+    /// </returns>
+    [DllImport("user32.dll")]
+    public static extern IntPtr GetForegroundWindow();
 
     public static IntPtr MakeLParam(int x, int y) => (IntPtr)((y << 16) | (x & 0xFFFF));
   }
