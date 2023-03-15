@@ -22,6 +22,24 @@ namespace MyApp
       // 로그아웃 되었습니다 창 찾는 부분 끝
       if (hWnd_logoutNoti == IntPtr.Zero)
         return;
+        //get window size
+      RECT rect = new RECT();
+      GetWindowRect(hWnd_logoutNoti,out rect);
+      int width = rect.Right - rect.Left;
+      int height = rect.Bottom - rect.Top;
+      Console.WriteLine("width:" + width);
+      Console.WriteLine("height:" + height);
+
+      // 허용 가능한 해상도 쌍을 설정, 299x142, 374x177
+      if (!(
+        (width == 299 && height == 142) ||
+        (width == 374 && height == 177)
+      ))
+      {
+        // 허용 가능한 해상도가 아니면 종료
+        return;
+      }
+
       sendKey(hWnd_logoutNoti, VirtualKeys.Return);
       Console.WriteLine("logoutNoti:" + hWnd_logoutNoti);
       // 로그인 창 찾는 부분 시작
